@@ -1,15 +1,17 @@
-//01. 서버 사용을 위하여 http 모듈을 http 변수에 담는다.
-var http = require('http'); //require = 다른 언어의 import와 유사
+//express를 이용한 서버 생성
+//express 로드
+const express = require('express');
+//express() 함수가 application 함수를 로드하고 그것을 app 변수에 저장하여 애플리케이션을 만든다.
+const app = express();
+//포트번호
+const port = 3000;
 
-//02. http 모듈로 서버를 생성한다.
-var server = http.createServer(function(request,response){              //http 모듈에 미리 정의 되어 있는 createServer 함수로 서버를 생성
-                                                                        //해당 함수에 파라미터로 입력되는 함수는 이름이 없다. ( 요청이 들어올 때 함수 로직 실행 )
-    response.writeHead(200, {'Content-Type':'text/html'});              //200 = http OK 상태 코드, Content-Type이 text고 HTML 형태라고 명시
-    response.end('Hello Node.js!!');                                    //end() 함수는 컨텐츠를 받아서 HTML 형태로 화면애 출력해주는 함수
-
+//기본 경로 지정
+//req = 요청 객체 / res = 응답 객체
+app.get("/", (req,res) => {
+    res.send("Hello World!"); //화면에 출력
 });
 
-//03. listen 함수로 3000번 포트를 가진 서버를 실행, 서버가 정상적으로 실행됨을 확인하기 위해 로그 찍어주기
-server.listen(3000, function(){
-    console.log('server is running ...');
+app.listen(port, () => {
+    console.log('Server is Running at http://localhost:'+port);
 });
