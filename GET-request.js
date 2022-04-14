@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const log_ip = require('request-ip');
 
 //Default Page
 app.get("/", (req, res) => {
@@ -25,6 +26,8 @@ app.get("/user", (req, res) => {
 
 app.get("/Get/:name/:age", (req, res) => {  //바람직한 방법
     const param = req.params; //변수에 객체 저장
+    const ip = log_ip.getClientIp(req);
+    console.log(ip);    //Client Ip 출력
     console.log(param); //로그에 값 출력
 
     res.send('user name : '+param.name+' / user age : '+param.age);
