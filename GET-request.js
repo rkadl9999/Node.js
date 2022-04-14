@@ -10,8 +10,8 @@ app.get("/", (req, res) => {
 
 //User Page
 app.get("/user", (req, res) => {
-    var name = req.param('name');   //파라미터로 받아와서 변수에 저장
-    var age = req.param('age');
+    let name = req.param('name');   //파라미터로 받아와서 변수에 저장
+    let age = req.param('age');
 
     if (name == null && age == null){           //파라미터 값 검사
         res.send('Insert your name and age!');
@@ -24,7 +24,7 @@ app.get("/user", (req, res) => {
 /*------------------------------------------------------------------------------------------*/
 
 app.get("/Get/:name/:age", (req, res) => {  //바람직한 방법
-    var param = req.params; //변수에 객체 저장
+    const param = req.params; //변수에 객체 저장
     console.log(param); //로그에 값 출력
 
     res.send('user name : '+param.name+' / user age : '+param.age);
