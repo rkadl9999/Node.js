@@ -3,6 +3,7 @@ const express = require('express');
 const mysql = require('mysql');
 const db = require('./conn-DB-forMAC.js');
 const md5 = require('md5');
+const log_ip = require('request-ip');
 const app = express();
 const port = 3000;
 
@@ -21,10 +22,12 @@ app.get("/", (req, res) => {
 app.post("/signUp", (req, res) => {
     let id = req.body.id;
     let password = md5(req.body.password);      //SQL Injection으로 DB가 공격당할 것을 대비해 md5 해쉬값으로 저장
+    let ip = log_ip.getClientIp(req);  //클라이언트 IP 가져오기
 
     db.connection.query(insert,[id,password], (err, result) => {
         if (err) throw error;       //error 처리
         console.log(result); //성공 값 출력
+        console.log(ip); //ip 
     })
 })
 
